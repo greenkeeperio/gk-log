@@ -1,7 +1,6 @@
 module.exports = function Log({logsDb, accountId, repoSlug, context}) {
-  const log = (type, message, params) => {
+  const log = (type, message = 'no message specified', params) => {
     let date = new Date()
-    console.log(date.toISOString(), accountId, repoSlug, context, type, message)
     const shortDate = date.toISOString().replace(/[-,:]/g,'').replace('T', '-').split('.')[0]
     const randomString = Math.ceil(Math.random(1)*1000000)
     logsDb.put({
@@ -14,7 +13,6 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
       params,
       createdAt: date.toISOString()
     })
-    .then(response => console.log('put worked'))
     .catch(err => console.log(err))
   }
 
