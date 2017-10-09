@@ -2,7 +2,7 @@ const assert = require('assert')
 const Log = require('./index')
 
 const accountId = '123test'
-const repoSlug = 'testOrg/testRepo'
+const repoSlug = 'testorg/testrepo'
 const context = 'running-the-tests'
 const testDb = {
   put: async (a) => {
@@ -46,3 +46,17 @@ const test3Db = {
 
 const logger3 = Log({logsDb: test3Db, accountId, repoSlug, context})
 logger3.info()
+
+// logger converts repoSlug to lower case
+const test4Db = {
+  put: async (a) => {
+    assert.equal(a.accountId, accountId, 'correct accountId found')
+    assert.equal(a.repoSlug, repoSlug, 'correct repoSlug found')
+    assert.equal(a.context, context, 'correct context found')
+    assert.equal(a.type, 'info', 'correct type found')
+    assert.equal(a.message, 'no message specified', 'correct message found')
+  }
+}
+
+const logger4 = Log({logsDb: test4Db, accountId, repoSlug: 'TestOrg/TestRepo', context})
+logger4.info()

@@ -6,7 +6,7 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
     logsDb.put({
       _id: `${accountId}:${repoSlug}:${type}:${context}:${shortDate}:${randomString}`,
       accountId,
-      repoSlug,
+      repoSlug: repoSlug.toLowerCase(),
       context,
       type,
       message,
