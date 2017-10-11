@@ -60,3 +60,32 @@ const test4Db = {
 
 const logger4 = Log({logsDb: test4Db, accountId, repoSlug: 'TestOrg/TestRepo', context})
 logger4.info()
+
+// logger is initialized with a repoSlug
+const test5Db = {
+  put: async (a) => {
+    const expectedIdPartial = '123test:testorg/testrepo:info:running-the-tests:'
+    assert.ok(a._id.match(expectedIdPartial), 'correct id found')
+    assert.equal(a.accountId, accountId, 'correct accountId found')
+    assert.equal(a.repoSlug, repoSlug, 'correct repoSlug found')
+    assert.equal(a.context, context, 'correct context found')
+    assert.equal(a.type, 'info', 'correct type found')
+  }
+}
+
+const logger5 = Log({logsDb: test5Db, repoSlug, accountId, context})
+logger5.info('test')
+
+// logger is initialized without a repoSlug
+const test6Db = {
+  put: async (a) => {
+    const expectedIdPartial = '123test:info:running-the-tests:'
+    assert.ok(a._id.match(expectedIdPartial), 'correct id found')
+    assert.equal(a.accountId, accountId, 'correct accountId found')
+    assert.equal(a.context, context, 'correct context found')
+    assert.equal(a.type, 'info', 'correct type found')
+  }
+}
+
+const logger6 = Log({logsDb: test6Db, accountId, context})
+logger6.info('test')
