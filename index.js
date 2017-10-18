@@ -3,10 +3,12 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
     let date = new Date()
     const shortDate = date.toISOString().replace(/[-,:]/g,'').replace('T', '-').split('.')[0]
     const randomString = Math.ceil(Math.random(1)*1000000)
+    const repoSlugIfExists = repoSlug ? repoSlug + ':' : ''
+
     logsDb.put({
-      _id: `${accountId}:${repoSlug}:${type}:${context}:${shortDate}:${randomString}`,
+      _id: `${accountId}:${repoSlugIfExists}${type}:${context}:${shortDate}:${randomString}`,
       accountId,
-      repoSlug: repoSlug.toLowerCase(),
+      repoSlug: repoSlug ? repoSlug.toLowerCase() : '',
       context,
       type,
       message,
