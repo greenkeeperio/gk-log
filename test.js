@@ -89,3 +89,17 @@ const test6Db = {
 
 const logger6 = Log({logsDb: test6Db, accountId, context})
 logger6.info('test')
+
+// logger is initialized without an accountId
+const test7Db = {
+  put: async (a) => {
+    const expectedIdPartial = 'testorg/testrepo:info:running-the-tests:'
+    assert.ok(a._id.match(expectedIdPartial), 'correct id found')
+    assert.equal(a.repoSlug, repoSlug, 'correct repoSlug found')
+    assert.equal(a.context, context, 'correct context found')
+    assert.equal(a.type, 'info', 'correct type found')
+  }
+}
+
+const logger7 = Log({logsDb: test7Db, repoSlug, context})
+logger7.info('test')

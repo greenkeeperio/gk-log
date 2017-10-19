@@ -4,9 +4,10 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
     const shortDate = date.toISOString().replace(/[-,:]/g,'').replace('T', '-').split('.')[0]
     const randomString = Math.ceil(Math.random(1)*1000000)
     const repoSlugIfExists = repoSlug ? repoSlug + ':' : ''
+    const accountIdIfExists = accountId ? accountId + ':' : ''
 
     logsDb.put({
-      _id: `${accountId}:${repoSlugIfExists}${type}:${context}:${shortDate}:${randomString}`,
+      _id: `${accountIdIfExists}${repoSlugIfExists}${type}:${context}:${shortDate}:${randomString}`,
       accountId,
       repoSlug: repoSlug ? repoSlug.toLowerCase() : '',
       context,
