@@ -16,7 +16,7 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
       params,
       createdAt: date.toISOString()
     })
-    .catch(err => console.log(err))
+    .catch(err => { throw err })
   }
 
   return {
