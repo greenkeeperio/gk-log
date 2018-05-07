@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "test": "node test.js"
   },
   "author": "",
   "license": "Apache-2.0",
