@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test.js"
   },
+  "engines": {
+    "node": "8"
+  },
   "author": "",
   "license": "Apache-2.0",
   "repository": {
