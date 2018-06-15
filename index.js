@@ -6,7 +6,7 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
     const repoSlugIfExists = repoSlug ? repoSlug + ':' : ''
     const accountIdIfExists = accountId ? accountId + ':' : ''
 
-    logsDb.put({
+    const logDoc = {
       _id: `${accountIdIfExists}${repoSlugIfExists}${type}:${context}:${shortDate}:${randomString}`,
       accountId,
       repoSlug: repoSlug ? repoSlug.toLowerCase() : '',
@@ -15,8 +15,13 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
       message,
       params,
       createdAt: date.toISOString()
-    })
-    .catch(err => { throw err })
+    }
+
+    if (process.env.GK_DEBUG) {
+      console.log(logDoc)
+    }
+
+    logsDb.put(logDoc).catch(err => { throw err })
   }
 
   return {
