@@ -9,7 +9,7 @@ node_js:
 before_script:
   - npm i -g npm
   - npm prune
-  - npm install
+install: npm install
 after_success:
   - npx semantic-release
 # Trigger a push build on master and greenkeeper branches + PRs build on every branches
