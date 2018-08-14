@@ -27,7 +27,7 @@ module.exports = function Log({logsDb, accountId, repoSlug, context}) {
   return {
     debug: (message, params) => {
       if (process.env.GK_DEBUG) {
-        log('info', message, params)
+        log('debug', message, params)
       }
     },
     info: (message, params) => {
