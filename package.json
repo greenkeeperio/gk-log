@@ -16,6 +16,6 @@
     "url": "https://github.com/greenkeeperio/gk-log.git"
   },
   "devDependencies": {
-    "semantic-release": "^15.3.0"
+    "semantic-release": "^17.0.7"
   }
 }
